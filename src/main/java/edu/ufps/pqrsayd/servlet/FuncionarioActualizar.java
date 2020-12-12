@@ -1,0 +1,84 @@
+package edu.ufps.pqrsayd.servlet;
+
+import edu.ufps.pqrsayd.dto.FuncionarioDto;
+import edu.ufps.pqrsayd.dto.Mensaje;
+import edu.ufps.pqrsayd.dto.TipoMensaje;
+import edu.ufps.pqrsayd.service.postgres.Service;
+import java.io.IOException;
+import java.util.Date;
+import javax.servlet.ServletException;
+import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
+import edu.ufps.pqrsayd.util.Encriptador;
+import edu.ufps.pqrsayd.util.Utilidades;
+
+public class FuncionarioActualizar extends HttpServlet {
+
+    private HttpSession session;
+
+    @Override
+    protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        try {
+            session = req.getSession();
+            req.setCharacterEncoding("UTF-8");
+            resp.setCharacterEncoding("UTF-8");
+
+            Integer id = Utilidades.validateInputNumber(req.getParameter("id"));
+            String nombreCompleto = Utilidades.validateInputText(req.getParameter("nombre_completo"));
+            String correo = Utilidades.validateInputText(req.getParameter("correo"));
+            String cargo = Utilidades.validateInputText(req.getParameter("cargo"));
+            String celular = Utilidades.validateInputText(req.getParameter("celular"));
+            Integer codigoInterno = Utilidades.validateInputNumber(req.getParameter("codigo_interno"));
+            Boolean es_administrador = Utilidades.validateInputBoolean(req.getParameter("es_administrador"));
+
+            Boolean change_password = Utilidades.validateInputBoolean(req.getParameter("change_password"));
+            String confirm_password = Utilidades.validateInputText(req.getParameter("confirm_password"));
+            String password = Utilidades.validateInputText(req.getParameter("password"));
+
+            if (nombreCompleto == null || correo == null || id == null) {
+                resp.sendRedirect(req.getContextPath() + "/main/actualizar_funcionario.jsp?id=" + id);
+                session.setAttribute("mensaje", new Mensaje("Datos incompletos", "Debe ingresar todos los campos con *.", TipoMensaje.ERROR));
+                return;
+            }
+            if (change_password && (confirm_password == null || password == null || !password.equals(confirm_password))) {
+                resp.sendRedirect(req.getContextPath() + "/main/actualizar_funcionario.jsp?id=" + id);
+                session.setAttribute("mensaje", new Mensaje("Datos incompletos", "Debe ingresar la nueva contraseña", TipoMensaje.ERROR));
+                return;
+            }
+            Service controlador = (Service) session.getAttribute("controlador");
+
+            FuncionarioDto funcionario = controlador.serviceFuncionario().buscarPorId(id);
+
+            if (funcionario == null) {
+                session.setAttribute("mensaje", new Mensaje("Datos errados", "El funcionario no existe.", TipoMensaje.WARNING));
+                resp.sendRedirect(req.getContextPath() + "/main/funcionarios.jsp");
+                return;
+            }
+            funcionario.setCodigoInterno(codigoInterno);
+            funcionario.setCargo(cargo);
+            funcionario.setCelular(celular);
+            funcionario.setCorreo(correo);
+            funcionario.setEsAdministrador(es_administrador);
+            funcionario.setFechaModificacion(new Date());
+            funcionario.setNombreCompleto(nombreCompleto);
+
+            if (change_password) {
+                funcionario.setContrasena(Encriptador.encriptar(password));
+            }
+
+            controlador.serviceFuncionario().guardar(funcionario);
+            session.setAttribute("mensaje", new Mensaje("Formulario registrado", "Se ha registrado exitosamente el funcionario.", TipoMensaje.SUCCESS));
+            resp.sendRedirect(req.getContextPath() + "/main/actualizar_funcionario.jsp?id=" + id);
+
+            return;
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        session.setAttribute("mensaje", new Mensaje("Error", "Error al tratar de guardar el formulario.", TipoMensaje.ERROR));
+        resp.sendRedirect(req.getContextPath() + "/main/funcionarios.jsp");
+
+    }
+
+}
