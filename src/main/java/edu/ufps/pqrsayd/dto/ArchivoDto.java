@@ -2,8 +2,8 @@ package edu.ufps.pqrsayd.dto;
 
 import java.io.Serializable;
 import java.util.Date;
-import java.util.ResourceBundle;
 import edu.ufps.pqrsayd.util.Column;
+import edu.ufps.pqrsayd.util.Parametros;
 import edu.ufps.pqrsayd.util.Table;
 
 @Table(name = "archivo")
@@ -58,8 +58,8 @@ public class ArchivoDto implements Serializable {
     }
 
     public String getUrlArchivo() {
-        ResourceBundle rb = ResourceBundle.getBundle("resources.parametros");
-        return rb.getString("FTP_PUBLIC") + "/" + this.nombreEnServidor;
+        Parametros PARAMETROS = new Parametros();
+        return PARAMETROS.getFTP_PUBLIC() + "/" + this.nombreEnServidor;
     }
 
 }

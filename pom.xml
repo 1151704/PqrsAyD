@@ -4,7 +4,7 @@
 
     <groupId>edu.ufps</groupId>
     <artifactId>PqrsAyD</artifactId>
-    <version>1.0.0</version>
+    <version>1.0.2</version>
     <packaging>war</packaging>
 
     <name>PqrsAyD</name>
