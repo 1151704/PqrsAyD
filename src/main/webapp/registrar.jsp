@@ -68,13 +68,13 @@
                                     <div class="col-lg-6">
                                         <div class="form-group">
                                             <label>Identificación *</label>
-                                            <input type="number" class="form-control" name="identificacion" required="true">
+                                            <input type="number" class="form-control" name="identificacion" required="true" maxlength="15">
                                         </div>
                                     </div>
                                     <div class="col-lg-2">
                                         <div class="form-group">
                                             <label>Código</label>
-                                            <input type="number" class="form-control" name="codigo_interno">
+                                            <input type="number" class="form-control" name="codigo_interno" maxlength="5">
                                         </div>
                                     </div>
                                 </div>
@@ -82,25 +82,25 @@
                                     <div class="col-lg-3">
                                         <div class="form-group">
                                             <label>Primer Nombre *</label>
-                                            <input type="text" class="form-control" name="primer_nombre" required="true">
+                                            <input type="text" class="form-control" name="primer_nombre" required="true" maxlength="15">
                                         </div>
                                     </div>
                                     <div class="col-lg-3">
                                         <div class="form-group">
                                             <label>Segundo Nombre</label>
-                                            <input type="text" class="form-control" name="segundo_nombre">
+                                            <input type="text" class="form-control" name="segundo_nombre" maxlength="15">
                                         </div>
                                     </div>
                                     <div class="col-lg-3">
                                         <div class="form-group">
                                             <label>Primer Apellido *</label>
-                                            <input type="text" class="form-control" name="primer_apellido" required="true">
+                                            <input type="text" class="form-control" name="primer_apellido" required="true" maxlength="15">
                                         </div>
                                     </div>
                                     <div class="col-lg-3">
                                         <div class="form-group">
                                             <label>Segundo apellido</label>
-                                            <input type="text" class="form-control" name="segundo_apellido">
+                                            <input type="text" class="form-control" name="segundo_apellido" maxlength="15">
                                         </div>
                                     </div>
                                 </div>
@@ -108,25 +108,25 @@
                                     <div class="col-lg-3">
                                         <div class="form-group">
                                             <label>Dirección *</label>
-                                            <input type="text" class="form-control" name="direccion" required="true">
+                                            <input type="text" class="form-control" name="direccion" required="true" maxlength="30">
                                         </div>
                                     </div>
                                     <div class="col-lg-3">
                                         <div class="form-group">
                                             <label>Correo *</label>
-                                            <input type="email" class="form-control" name="correo" required="true">
+                                            <input type="email" class="form-control" name="correo" required="true" maxlength="30">
                                         </div>
                                     </div>
                                     <div class="col-lg-3">
                                         <div class="form-group">
                                             <label>Celular</label>
-                                            <input type="text" class="form-control" name="celular">
+                                            <input type="text" class="form-control" name="celular" maxlength="15">
                                         </div>
                                     </div>
                                     <div class="col-lg-3">
                                         <div class="form-group">
                                             <label>Teléfono</label>
-                                            <input type="number" class="form-control" name="telefono" maxlength="10">
+                                            <input type="number" class="form-control" name="telefono" maxlength="7">
                                         </div>
                                     </div>
                                 </div>
