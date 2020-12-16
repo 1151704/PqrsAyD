@@ -114,7 +114,7 @@
                                     <div class="col-lg-3">
                                         <div class="form-group">
                                             <label>Correo *</label>
-                                            <input type="text" class="form-control" name="correo" required="true">
+                                            <input type="email" class="form-control" name="correo" required="true">
                                         </div>
                                     </div>
                                     <div class="col-lg-3">
@@ -126,7 +126,7 @@
                                     <div class="col-lg-3">
                                         <div class="form-group">
                                             <label>Teléfono</label>
-                                            <input type="text" class="form-control" name="telefono">
+                                            <input type="number" class="form-control" name="telefono" maxlength="10">
                                         </div>
                                     </div>
                                 </div>

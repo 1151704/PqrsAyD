@@ -19,8 +19,7 @@ public class CerrarSesion extends HttpServlet {
         session = req.getSession();
         session.invalidate();        
         session = req.getSession();        
-        session.setAttribute("mensaje", new Mensaje("Error", "Error al tratar de guardar el formulario.", TipoMensaje.ERROR));
-        resp.sendRedirect(req.getContextPath() + "/main/funcionarios.jsp");
+        resp.sendRedirect(req.getContextPath() + "index.jsp");
 
     }
 
